@@ -20,6 +20,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
         
         requestAccess()
     }
@@ -34,7 +36,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func loadEvents() {
         guard let selectedCalendar = selectedCalendar else { return }
-        
         
         let weekFromNow = Date().advanced(by: TimeInterval.week)
         
@@ -77,12 +78,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             preconditionFailure("Events must be loaded if numberOfRows isnt zero")
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventCell else {
+            preconditionFailure("Check cell configuration")
+        }
         
         let event = events[indexPath.row]
         
-        cell.textLabel?.text = event.title
-        
+        cell.configure(with: event)
         
         return cell
     }
