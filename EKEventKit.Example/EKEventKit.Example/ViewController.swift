@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let eventStore = EKEventStore()
     
-    lazy var selectedCalendar = eventStore.defaultCalendarForNewEvents
+    lazy var selectedCalendars = Set([eventStore.defaultCalendarForNewEvents].compactMap({ $0 }))
     
     var events: [EKEvent]?
     
@@ -35,11 +35,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func loadEvents() {
-        guard let selectedCalendar = selectedCalendar else { return }
-        
         let weekFromNow = Date().advanced(by: TimeInterval.week)
         
-        let predicate = eventStore.predicateForEvents(withStart: Date(), end: weekFromNow, calendars: [selectedCalendar])
+        let predicate = eventStore.predicateForEvents(withStart: Date(), end: weekFromNow, calendars: Array(selectedCalendars))
         events = eventStore.events(matching: predicate)
         
         DispatchQueue.main.async {
@@ -48,10 +46,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func selectCalendarTapped(_ sender: Any) {
-        let chooser = EKCalendarChooser(selectionStyle: .single, displayStyle: .allCalendars, entityType: .event, eventStore: eventStore)
+        let chooser = EKCalendarChooser(selectionStyle: .multiple, displayStyle: .allCalendars, entityType: .event, eventStore: eventStore)
         chooser.delegate = self
         chooser.showsDoneButton = true
         chooser.showsCancelButton = true
+        chooser.selectedCalendars = selectedCalendars
         
         let nvc = UINavigationController(rootViewController: chooser)
         
@@ -122,13 +121,13 @@ extension ViewController: EKEventEditViewDelegate {
 extension ViewController: EKCalendarChooserDelegate {
     func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {
         dismiss(animated: true, completion: nil)
+        
+        selectedCalendars = calendarChooser.selectedCalendars
+        loadEvents()
     }
     
-    func calendarChooserSelectionDidChange(_ calendarChooser: EKCalendarChooser) {
-        if let selected = calendarChooser.selectedCalendars.first {
-            selectedCalendar = selected
-            loadEvents()
-        }
+    func calendarChooserDidCancel(_ calendarChooser: EKCalendarChooser) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
