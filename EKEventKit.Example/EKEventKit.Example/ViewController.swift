@@ -15,6 +15,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let eventStore = EKEventStore()
     
+    private let nonBreakingSpace = "\u{00a0}"
+    
     lazy var selectedCalendars = Set([eventStore.defaultCalendarForNewEvents].compactMap({ $0 }))
     
     var events: [EKEvent]?
@@ -89,7 +91,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return
         }
         
-        footerLabel.text = "Selected calendars: \(selectedCalendars.map({ $0.title }).joined(separator: " | "))"
+        let text = NSMutableAttributedString(string: "Selected calendars: ")
+        
+        let spacing = String(repeating: " ", count: 4)
+        
+        for calendar in selectedCalendars {
+            let attachment = imageStringAttachment(for: calendar, with: footerLabel.bounds.height / 2)
+            let imgString = NSAttributedString(attachment: attachment)
+            text.append(imgString)
+            text.append(NSAttributedString(string: "\(nonBreakingSpace)\(calendar.title)\(spacing)"))
+        }
+        
+        footerLabel.attributedText = text
+    }
+    
+    private func imageStringAttachment(for calendar: EKCalendar, with uniformSize: CGFloat) -> NSTextAttachment {
+        let image = UIImage(named: "dot")!.withTintColor(UIColor(cgColor: calendar.cgColor))
+        let attachment = NSTextAttachment()
+        attachment.bounds = CGRect(x: 0, y: 0, width: uniformSize, height: uniformSize)
+        attachment.image = image
+        return attachment
     }
     
     // MARK: tableView
