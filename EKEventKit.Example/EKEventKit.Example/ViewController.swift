@@ -11,6 +11,7 @@ import EventKitUI
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var footerLabel: UILabel!
     
     let eventStore = EKEventStore()
     
@@ -22,6 +23,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         requestAccess()
+        
+        displaySelectedCalendars()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        // autosize table view footer
+        if let footer = tableView.tableFooterView {
+            let newSize = footer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            footer.frame.size.height = newSize.height
+        }
     }
     
     func requestAccess() {
@@ -68,6 +81,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         eventEditViewController.editViewDelegate = self
         
         present(eventEditViewController, animated: true, completion: nil)
+    }
+    
+    func displaySelectedCalendars() {
+        guard !selectedCalendars.isEmpty else {
+            footerLabel.text = nil
+            return
+        }
+        
+        footerLabel.text = "Selected calendars: \(selectedCalendars.map({ $0.title }).joined(separator: " | "))"
     }
     
     // MARK: tableView
@@ -127,6 +149,7 @@ extension ViewController: EKCalendarChooserDelegate {
         dismiss(animated: true, completion: nil)
         
         selectedCalendars = calendarChooser.selectedCalendars
+        displaySelectedCalendars()
         loadEvents()
     }
     
