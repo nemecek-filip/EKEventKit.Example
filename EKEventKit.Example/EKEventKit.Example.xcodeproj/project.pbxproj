@@ -60,12 +60,12 @@
 			children = (
 				DCE17818243209A500BC4790 /* AppDelegate.swift */,
 				DCE1781A243209A500BC4790 /* SceneDelegate.swift */,
+				DCE1782C24321B8500BC4790 /* EventCell.swift */,
 				DCE1781C243209A500BC4790 /* ViewController.swift */,
 				DCE1781E243209A500BC4790 /* Main.storyboard */,
 				DCE17821243209A700BC4790 /* Assets.xcassets */,
 				DCE17823243209A700BC4790 /* LaunchScreen.storyboard */,
 				DCE17826243209A700BC4790 /* Info.plist */,
-				DCE1782C24321B8500BC4790 /* EventCell.swift */,
 			);
 			path = EKEventKit.Example;
 			sourceTree = "<group>";

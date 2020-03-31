@@ -15,17 +15,27 @@ class EventCell: UITableViewCell {
     @IBOutlet var eventDateLabel: UILabel!
     @IBOutlet var eventDurationLabel: UILabel!
     
-    private static var dateFormatter: RelativeDateTimeFormatter = {
+    private static var relativeDateFormatter: RelativeDateTimeFormatter = {
         let formatter = RelativeDateTimeFormatter()
         formatter.dateTimeStyle = .named
+        return formatter
+    }()
+    
+    private static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
         return formatter
     }()
     
     func configure(with event: EKEvent) {
         eventTitleLabel.text = event.title
         calendarColorView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
-        eventDurationLabel.text = event.isAllDay ? "all day" : ""
-        eventDateLabel.text = EventCell.dateFormatter.localizedString(for: event.startDate, relativeTo: Date()).uppercased()
+        eventDurationLabel.text = event.isAllDay ? "all day" : formatDate(forNonAllDayEvent: event)
+        eventDateLabel.text = EventCell.relativeDateFormatter.localizedString(for: event.startDate, relativeTo: Date()).uppercased()
+    }
+    
+    private func formatDate(forNonAllDayEvent event: EKEvent) -> String {
+        return "\(EventCell.dateFormatter.string(from: event.startDate)) - \(EventCell.dateFormatter.string(from: event.endDate))"
     }
     
     override func awakeFromNib() {

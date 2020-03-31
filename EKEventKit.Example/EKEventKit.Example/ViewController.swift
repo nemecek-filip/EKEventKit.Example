@@ -20,8 +20,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 300
         
         requestAccess()
     }
@@ -45,6 +43,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    @IBAction func addButtonTapped(_ sender: Any) {
+        showEditViewController(for: nil)
+    }
+    
     @IBAction func selectCalendarTapped(_ sender: Any) {
         let chooser = EKCalendarChooser(selectionStyle: .multiple, displayStyle: .allCalendars, entityType: .event, eventStore: eventStore)
         chooser.delegate = self
@@ -57,10 +59,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         present(nvc, animated: true, completion: nil)
     }
     
-    func showEditViewController(for event: EKEvent) {
+    func showEditViewController(for event: EKEvent?) {
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.eventStore = eventStore
-        eventEditViewController.event = event
+        if let event = event {
+            eventEditViewController.event = event // when setting to nil the controller would not display anything
+        }
         eventEditViewController.editViewDelegate = self
         
         present(eventEditViewController, animated: true, completion: nil)
