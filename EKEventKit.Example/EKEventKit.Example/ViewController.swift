@@ -148,7 +148,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         showEditViewController(for: event)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+        -> UISwipeActionsConfiguration? {
+        guard let events = events else {
+            preconditionFailure()
+        }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+            let event = events[indexPath.row]
+            self.deleteEventWithConfirmation(event: event, at: indexPath)
+            completionHandler(true)
+        }
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
 
+    
+    func deleteEventWithConfirmation(event: EKEvent, at indexPath: IndexPath) {
+        let ac = UIAlertController(title: "Confirm delete", message: "This will delete: \(event.title ?? "No title") from calendar \(event.calendar.title)", preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+            do {
+                try self.eventStore.remove(event, span: .thisEvent)
+                self.events?.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+            } catch {
+                print(error)
+            }
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(ac, animated: true)
+    }
 }
 
 // MARK: EKEventEditViewDelegate
