@@ -25,8 +25,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         requestAccess()
-        
-        displaySelectedCalendars()
     }
     
     override func viewWillLayoutSubviews() {
@@ -43,6 +41,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         eventStore.requestAccess(to: .event) { (granted, error) in
             if granted {
                 self.loadEvents()
+                
+                self.displaySelectedCalendars()
             }
         }
     }
@@ -91,9 +91,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return
         }
         
-        let text = NSMutableAttributedString(string: "Selected calendars: ")
+        let text = NSMutableAttributedString(string: "Selected calendars:  ")
         
-        let spacing = String(repeating: " ", count: 4)
+        let spacing = String(repeating: " ", count: 3)
         
         for calendar in selectedCalendars {
             let attachment = imageStringAttachment(for: calendar, with: footerLabel.bounds.height / 2)
