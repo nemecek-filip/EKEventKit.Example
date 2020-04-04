@@ -14,6 +14,7 @@ class EventCell: UITableViewCell {
     @IBOutlet var eventTitleLabel: UILabel!
     @IBOutlet var eventDateLabel: UILabel!
     @IBOutlet var eventDurationLabel: UILabel!
+    @IBOutlet var mapIcon: UIImageView!
     
     private static var relativeDateFormatter: RelativeDateTimeFormatter = {
         let formatter = RelativeDateTimeFormatter()
@@ -32,6 +33,7 @@ class EventCell: UITableViewCell {
         calendarColorView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
         eventDurationLabel.text = event.isAllDay ? "all day" : formatDate(forNonAllDayEvent: event)
         eventDateLabel.text = EventCell.relativeDateFormatter.localizedString(for: event.startDate, relativeTo: Date()).uppercased()
+        mapIcon.isHidden = !event.hasGeoLocation
     }
     
     private func formatDate(forNonAllDayEvent event: EKEvent) -> String {

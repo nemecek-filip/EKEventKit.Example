@@ -76,6 +76,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         present(nvc, animated: true, completion: nil)
     }
     
+    @IBAction func githubButtonTapped(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://github.com/nemecek-filip")!, options: [:], completionHandler: nil)
+    }
+    
     func showEditViewController(for event: EKEvent?) {
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.eventStore = eventStore
@@ -131,6 +135,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         let event = events[indexPath.row]
+        
         
         cell.configure(with: event)
         
@@ -222,5 +227,15 @@ extension TimeInterval {
     
     static var week: TimeInterval {
         return 7 * 24 * 60 * 60
+    }
+}
+
+extension EKEvent {
+    var hasGeoLocation: Bool {
+        return structuredLocation?.geoLocation != nil
+    }
+    
+    var isBirthdayEvent: Bool {
+        return birthdayContactIdentifier != nil
     }
 }

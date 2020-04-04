@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DCE17815243209A500BC4790 /* EKEventKit.Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EKEventKit.Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCE17815243209A500BC4790 /* EKXample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EKXample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE17818243209A500BC4790 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE1781A243209A500BC4790 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DCE1781C243209A500BC4790 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		DCE17816243209A500BC4790 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DCE17815243209A500BC4790 /* EKEventKit.Example.app */,
+				DCE17815243209A500BC4790 /* EKXample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			);
 			name = EKEventKit.Example;
 			productName = EKEventKit.Example;
-			productReference = DCE17815243209A500BC4790 /* EKEventKit.Example.app */;
+			productReference = DCE17815243209A500BC4790 /* EKXample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -296,7 +296,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "FN.EKEventKit-Example";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EKXample;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -314,7 +314,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "FN.EKEventKit-Example";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EKXample;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
