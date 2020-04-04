@@ -40,9 +40,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func requestAccess() {
         eventStore.requestAccess(to: .event) { (granted, error) in
             if granted {
-                self.loadEvents()
-                
-                self.displaySelectedCalendars()
+                DispatchQueue.main.async {
+                    self.loadEvents()
+                    
+                    self.displaySelectedCalendars()
+                }
             }
         }
     }
