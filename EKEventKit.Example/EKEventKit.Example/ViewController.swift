@@ -80,6 +80,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         UIApplication.shared.open(URL(string: "https://github.com/nemecek-filip")!, options: [:], completionHandler: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMap", let event = sender as? EKEvent {
+            let nvc = segue.destination as! UINavigationController
+            let mapController = nvc.topViewController as! MapViewController
+            mapController.title = event.title
+            mapController.coordinate = event.structuredLocation?.geoLocation?.coordinate
+        }
+    }
+    
     func showEditViewController(for event: EKEvent?) {
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.eventStore = eventStore
@@ -89,6 +98,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         eventEditViewController.editViewDelegate = self
         
         present(eventEditViewController, animated: true, completion: nil)
+    }
+    
+    func showOptions(for event: EKEvent) {
+        let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Show map", style: .default, handler: { (_) in
+            self.performSegue(withIdentifier: "showMap", sender: event)
+        }))
+        ac.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
+            self.showEditViewController(for: event)
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(ac, animated: true)
     }
     
     func displaySelectedCalendars() {
@@ -102,7 +124,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let spacing = String(repeating: " ", count: 3)
         
         for calendar in selectedCalendars {
-            let attachment = imageStringAttachment(for: calendar, with: footerLabel.bounds.height / 2)
+            let attachment = imageStringAttachment(for: calendar, with: 6)
             let imgString = NSAttributedString(attachment: attachment)
             text.append(imgString)
             text.append(NSAttributedString(string: "\(nonBreakingSpace)\(calendar.title)\(spacing)"))
@@ -153,7 +175,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let event = events[indexPath.row]
         
-        showEditViewController(for: event)
+        if event.hasGeoLocation {
+            showOptions(for: event)
+        } else {
+            showEditViewController(for: event)
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
