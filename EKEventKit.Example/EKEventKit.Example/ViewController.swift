@@ -106,7 +106,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.eventStore = eventStore
         if let event = event {
-            eventEditViewController.event = event // when setting to nil the controller would not display anything
+            eventEditViewController.event = event // when set to nil the controller would not display anything
         }
         eventEditViewController.editViewDelegate = self
         
@@ -224,6 +224,8 @@ extension ViewController: EKEventEditViewDelegate {
         }
     }
 }
+
+// MARK: EKCalendarChooserDelegate
 
 extension ViewController: EKCalendarChooserDelegate {
     func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {

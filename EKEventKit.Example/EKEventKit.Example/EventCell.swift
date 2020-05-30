@@ -30,7 +30,7 @@ class EventCell: UITableViewCell {
     
     func configure(with event: EKEvent) {
         eventTitleLabel.text = event.title
-        calendarColorView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
+        calendarColorView.backgroundColor = event.color
         eventDurationLabel.text = event.isAllDay ? "all day" : formatDate(forNonAllDayEvent: event)
         eventDateLabel.text = EventCell.relativeDateFormatter.localizedString(for: event.startDate, relativeTo: Date()).uppercased()
         mapIcon.isHidden = !event.hasGeoLocation
@@ -38,17 +38,6 @@ class EventCell: UITableViewCell {
     
     private func formatDate(forNonAllDayEvent event: EKEvent) -> String {
         return "\(EventCell.dateFormatter.string(from: event.startDate)) - \(EventCell.dateFormatter.string(from: event.endDate))"
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

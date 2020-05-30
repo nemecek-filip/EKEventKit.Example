@@ -6,7 +6,7 @@
 //  Copyright © 2020 Filip Němeček. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import EventKit
 
 extension EKEvent {
@@ -16,5 +16,9 @@ extension EKEvent {
     
     var isBirthdayEvent: Bool {
         return birthdayContactIdentifier != nil
+    }
+    
+    var color: UIColor {
+        return UIColor(cgColor: calendar.cgColor)
     }
 }
