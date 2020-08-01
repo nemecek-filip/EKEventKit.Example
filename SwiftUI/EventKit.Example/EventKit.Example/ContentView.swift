@@ -10,11 +10,6 @@ import SwiftUI
 import EventKit
 import Combine
 
-extension EKEvent: Identifiable {
-    public var id: String {
-        return eventIdentifier
-    }
-}
 
 struct ContentView: View {
     @State private var showingCalendarChooser = false
@@ -28,15 +23,16 @@ struct ContentView: View {
                     if eventsRepository.events?.isEmpty ?? true {
                         Text("No events available for this calendar selection")
                             .font(.headline)
+                            .foregroundColor(.secondary)
                     }
-                    ForEach(eventsRepository.events ?? [], id: \.eventIdentifier) { event in
-                        Text(event.title)
+                    ForEach(eventsRepository.events ?? []) { event in
+                        EventRow(event: event)
                     }
                 }
                 
-                Text("Selected calendars: \(eventsRepository.selectedCalendars?.count ?? 0)")
-                    .padding()
-                    .font(.caption)
+                SelectedCalendarsList(selectedCalendars: Array(eventsRepository.selectedCalendars ?? []))
+                    .padding(.vertical)
+                    .padding(.horizontal, 5)
                 
                 Button(action: {
                     self.showingCalendarChooser = true
