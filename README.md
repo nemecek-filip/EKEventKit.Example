@@ -11,6 +11,8 @@
 
 # EKEventKit Example
 
+#### SwiftUI version is currently work in progress. Feel free to help and suggest improvements. I have so far done just a little of SwiftUI..
+
 [![Twitter: @nemecek_f](https://img.shields.io/badge/contact-@nemecek_f-blue.svg?style=flat)](https://twitter.com/nemecek_f)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/nemecek-filip/EKEventKit.Example/blob/master/LICENSE)
 
