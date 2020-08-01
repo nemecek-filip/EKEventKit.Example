@@ -8,6 +8,7 @@
 
 import SwiftUI
 import EventKit
+import Combine
 
 extension EKEvent: Identifiable {
     public var id: String {
@@ -16,36 +17,26 @@ extension EKEvent: Identifiable {
 }
 
 struct ContentView: View {
-    @State private var events = [EKEvent]()
-    
-    @State private var selectedCalendars: Set<EKCalendar>?
-    
     @State private var showingCalendarChooser = false
     
-    func loadEvents() {
-        EventsRepository.shared.loadEvents { (events) in
-            if let events = events {
-                self.events = events
-            }
-        }
-    }
-    
-    func selectCalendars() {
-        
-    }
+    @ObservedObject var eventsRepository = EventsRepository.shared
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    if events.isEmpty {
+                    if eventsRepository.events?.isEmpty ?? true {
                         Text("No events available for this calendar selection")
                             .font(.headline)
                     }
-                    ForEach(events, id: \.eventIdentifier) { event in
+                    ForEach(eventsRepository.events ?? [], id: \.eventIdentifier) { event in
                         Text(event.title)
                     }
                 }
+                
+                Text("Selected calendars: \(eventsRepository.selectedCalendars?.count ?? 0)")
+                    .padding()
+                    .font(.caption)
                 
                 Button(action: {
                     self.showingCalendarChooser = true
@@ -58,9 +49,8 @@ struct ContentView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5))
             }
             .navigationBarTitle("EventKit Example")
-            .onAppear(perform: loadEvents)
             .sheet(isPresented: $showingCalendarChooser) {
-                CalendarChooser(calendars: self.$selectedCalendars, eventStore: EventsRepository.shared.eventStore)
+                CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: EventsRepository.shared.eventStore)
             }
         }
     }

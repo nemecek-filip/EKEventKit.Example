@@ -23,6 +23,7 @@ struct CalendarChooser: UIViewControllerRepresentable {
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<CalendarChooser>) -> UINavigationController {
         let chooser = EKCalendarChooser(selectionStyle: .multiple, displayStyle: .allCalendars, entityType: .event, eventStore: eventStore)
+        chooser.selectedCalendars = calendars ?? []
         chooser.delegate = context.coordinator
         chooser.showsDoneButton = true
         chooser.showsCancelButton = true
