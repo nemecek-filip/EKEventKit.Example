@@ -56,10 +56,7 @@ struct ContentView: View {
                 }) {
                     Text("Select calendars")
                 }
-                .padding()
-                .background(Color.orange)
-                .foregroundColor(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .buttonStyle(PrimaryButtonStyle())
                 .sheet(isPresented: $showingSheet) {
                     if self.activeSheet == .calendarChooser {
                         CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: self.eventsRepository.eventStore)

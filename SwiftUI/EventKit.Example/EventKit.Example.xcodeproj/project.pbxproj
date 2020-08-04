@@ -11,6 +11,7 @@
 		DC572BC624D9B4F500304B83 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BC524D9B4F500304B83 /* Notifications.swift */; };
 		DC572BC824D9B6DF00304B83 /* EKCalendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BC724D9B6DF00304B83 /* EKCalendar+Extension.swift */; };
 		DC572BCA24D9B72900304B83 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BC924D9B72900304B83 /* PrimaryButtonStyle.swift */; };
+		DC572BCC24D9B83300304B83 /* SecondaryCaptionTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BCB24D9B83300304B83 /* SecondaryCaptionTextStyle.swift */; };
 		DCB88F5B24D47D7500400853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB88F5A24D47D7500400853 /* AppDelegate.swift */; };
 		DCB88F5D24D47D7500400853 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB88F5C24D47D7500400853 /* SceneDelegate.swift */; };
 		DCB88F5F24D47D7500400853 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB88F5E24D47D7500400853 /* ContentView.swift */; };
@@ -30,6 +31,7 @@
 		DC572BC524D9B4F500304B83 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		DC572BC724D9B6DF00304B83 /* EKCalendar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKCalendar+Extension.swift"; sourceTree = "<group>"; };
 		DC572BC924D9B72900304B83 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
+		DC572BCB24D9B83300304B83 /* SecondaryCaptionTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryCaptionTextStyle.swift; sourceTree = "<group>"; };
 		DCB88F5724D47D7500400853 /* EventKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EventKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB88F5A24D47D7500400853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCB88F5C24D47D7500400853 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC572BCD24D9B90F00304B83 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				DC572BC924D9B72900304B83 /* PrimaryButtonStyle.swift */,
+				DC572BCB24D9B83300304B83 /* SecondaryCaptionTextStyle.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		DCB88F4E24D47D7500400853 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +87,7 @@
 		DCB88F5924D47D7500400853 /* EventKit.Example */ = {
 			isa = PBXGroup;
 			children = (
+				DC572BCD24D9B90F00304B83 /* Styles */,
 				DCB88F7524D5860700400853 /* Extensions */,
 				DCB88F7224D5831400400853 /* Views */,
 				DCB88F5A24D47D7500400853 /* AppDelegate.swift */,
@@ -86,7 +98,6 @@
 				DCB88F6524D47D7700400853 /* LaunchScreen.storyboard */,
 				DCB88F6824D47D7700400853 /* Info.plist */,
 				DCB88F6224D47D7700400853 /* Preview Content */,
-				DC572BC924D9B72900304B83 /* PrimaryButtonStyle.swift */,
 			);
 			path = EventKit.Example;
 			sourceTree = "<group>";
@@ -198,6 +209,7 @@
 				DCB88F5B24D47D7500400853 /* AppDelegate.swift in Sources */,
 				DC572BC424D9AEED00304B83 /* EventEditView.swift in Sources */,
 				DCB88F7924D5863B00400853 /* TimeInterval+Extension.swift in Sources */,
+				DC572BCC24D9B83300304B83 /* SecondaryCaptionTextStyle.swift in Sources */,
 				DCB88F5D24D47D7500400853 /* SceneDelegate.swift in Sources */,
 				DC572BCA24D9B72900304B83 /* PrimaryButtonStyle.swift in Sources */,
 				DCB88F6F24D47ECE00400853 /* EventsRepository.swift in Sources */,
