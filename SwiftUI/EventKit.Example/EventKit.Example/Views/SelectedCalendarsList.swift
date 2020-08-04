@@ -17,6 +17,13 @@ extension EKCalendar: Identifiable {
     public var color: Color {
         return Color(UIColor(cgColor: self.cgColor))
     }
+    
+    public var formattedText: Text {
+        return Text("•\u{00a0}")
+            .font(.headline)
+            .foregroundColor(self.color)
+            + Text("\(self.title)")
+    }
 }
 
 struct SelectedCalendarsList: View {
@@ -26,24 +33,13 @@ struct SelectedCalendarsList: View {
         var text = Text("")
         
         for calendar in selectedCalendars {
-            text = text + Text("\(calendar.title)  ").foregroundColor(calendar.color)
+            text = text + calendar.formattedText + Text("  ")
         }
         
         return text
     }
     
     var body: some View {
-        joinedText
-//        HStack {
-//            ForEach(selectedCalendars, id: \.calendarIdentifier) { calendar in
-//                HStack {
-//                    Circle()
-//                        .fill(calendar.color)
-//                        .frame(width: 5, height: 5)
-//                    Text(calendar.title)
-//                    Spacer(minLength: 10)
-//                }
-//            }
-//        }
+        joinedText.foregroundColor(.secondary)
     }
 }

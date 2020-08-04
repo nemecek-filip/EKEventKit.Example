@@ -52,7 +52,7 @@ struct EventRow: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
-        }
+        }.padding(.vertical, 5)
     }
 }
 

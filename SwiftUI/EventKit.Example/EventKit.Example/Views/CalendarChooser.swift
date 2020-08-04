@@ -6,9 +6,7 @@
 //  Copyright © 2020 Filip Němeček. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
-import EventKit
 import EventKitUI
 
 struct CalendarChooser: UIViewControllerRepresentable {

@@ -12,9 +12,23 @@ import Combine
 
 
 struct ContentView: View {
-    @State private var showingCalendarChooser = false
+    enum ActiveSheet {
+        case calendarChooser
+        case calendarEdit
+    }
+    
+    @State private var showingSheet = false
+    @State private var activeSheet: ActiveSheet = .calendarChooser
     
     @ObservedObject var eventsRepository = EventsRepository.shared
+    
+    @State private var selectedEvent: EKEvent?
+    
+    func showEditFor(_ event: EKEvent) {
+        activeSheet = .calendarEdit
+        selectedEvent = event
+        showingSheet = true
+    }
     
     var body: some View {
         NavigationView {
@@ -26,7 +40,9 @@ struct ContentView: View {
                             .foregroundColor(.secondary)
                     }
                     ForEach(eventsRepository.events ?? []) { event in
-                        EventRow(event: event)
+                        EventRow(event: event).onTapGesture {
+                            self.showEditFor(event)
+                        }
                     }
                 }
                 
@@ -35,7 +51,8 @@ struct ContentView: View {
                     .padding(.horizontal, 5)
                 
                 Button(action: {
-                    self.showingCalendarChooser = true
+                    self.activeSheet = .calendarChooser
+                    self.showingSheet = true
                 }) {
                     Text("Select calendars")
                 }
@@ -43,11 +60,22 @@ struct ContentView: View {
                 .background(Color.orange)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                .sheet(isPresented: $showingSheet) {
+                    if self.activeSheet == .calendarChooser {
+                        CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: self.eventsRepository.eventStore)
+                    } else {
+                        EventEditView(eventStore: self.eventsRepository.eventStore, event: self.selectedEvent)
+                    }
+                }
             }
             .navigationBarTitle("EventKit Example")
-            .sheet(isPresented: $showingCalendarChooser) {
-                CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: EventsRepository.shared.eventStore)
-            }
+            .navigationBarItems(trailing: Button(action: {
+                self.selectedEvent = nil
+                self.activeSheet = .calendarEdit
+                self.showingSheet = true
+            }, label: {
+                Image(systemName: "plus").frame(width: 44, height: 44)
+            }))
         }
     }
 }
