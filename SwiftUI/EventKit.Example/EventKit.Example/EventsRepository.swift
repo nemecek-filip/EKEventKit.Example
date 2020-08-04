@@ -28,12 +28,22 @@ class EventsRepository: ObservableObject {
         selectedCalendars = Set([eventStore.defaultCalendarForNewEvents].compactMap({ $0 }))
         
         $selectedCalendars.sink { [weak self] (calendars) in
-            self?.loadEvents { (events) in
-                DispatchQueue.main.async {
-                    self?.events = events
-                }
-            }
+            self?.loadAndUpdateEvents()
         }.store(in: &subscribers)
+        
+        NotificationCenter.default.publisher(for: .eventsDidChange)
+            .sink { [weak self] (notification) in
+                self?.loadAndUpdateEvents()
+                
+        }.store(in: &subscribers)
+    }
+    
+    private func loadAndUpdateEvents() {
+        loadEvents(completion: { (events) in
+            DispatchQueue.main.async {
+                self.events = events
+            }
+        })
     }
     
     func requestAccess(onGranted: @escaping Action, onDenied: @escaping Action) {
@@ -57,6 +67,12 @@ class EventsRepository: ObservableObject {
             completion(events)
         }) {
             completion(nil)
+        }
+    }
+    
+    deinit {
+        subscribers.forEach { (sub) in
+            sub.cancel()
         }
     }
 }

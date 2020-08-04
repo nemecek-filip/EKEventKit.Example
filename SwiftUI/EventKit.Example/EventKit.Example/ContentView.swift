@@ -74,7 +74,8 @@ struct ContentView: View {
                 self.activeSheet = .calendarEdit
                 self.showingSheet = true
             }, label: {
-                Image(systemName: "plus").frame(width: 44, height: 44)
+                //Image(systemName: "plus").frame(width: 44, height: 44)
+                Text("Add")
             }))
         }
     }

@@ -45,6 +45,10 @@ struct EventEditView: UIViewControllerRepresentable {
         
         func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
             parent.presentationMode.wrappedValue.dismiss()
+            
+            if action != .canceled {
+                NotificationCenter.default.post(name: .eventsDidChange, object: nil)
+            }
         }
     }
 }

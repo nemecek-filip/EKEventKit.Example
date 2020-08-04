@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DC572BC424D9AEED00304B83 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BC324D9AEED00304B83 /* EventEditView.swift */; };
+		DC572BC624D9B4F500304B83 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BC524D9B4F500304B83 /* Notifications.swift */; };
+		DC572BC824D9B6DF00304B83 /* EKCalendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BC724D9B6DF00304B83 /* EKCalendar+Extension.swift */; };
+		DC572BCA24D9B72900304B83 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC572BC924D9B72900304B83 /* PrimaryButtonStyle.swift */; };
 		DCB88F5B24D47D7500400853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB88F5A24D47D7500400853 /* AppDelegate.swift */; };
 		DCB88F5D24D47D7500400853 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB88F5C24D47D7500400853 /* SceneDelegate.swift */; };
 		DCB88F5F24D47D7500400853 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB88F5E24D47D7500400853 /* ContentView.swift */; };
@@ -24,6 +27,9 @@
 
 /* Begin PBXFileReference section */
 		DC572BC324D9AEED00304B83 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
+		DC572BC524D9B4F500304B83 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		DC572BC724D9B6DF00304B83 /* EKCalendar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKCalendar+Extension.swift"; sourceTree = "<group>"; };
+		DC572BC924D9B72900304B83 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		DCB88F5724D47D7500400853 /* EventKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EventKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB88F5A24D47D7500400853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCB88F5C24D47D7500400853 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +86,7 @@
 				DCB88F6524D47D7700400853 /* LaunchScreen.storyboard */,
 				DCB88F6824D47D7700400853 /* Info.plist */,
 				DCB88F6224D47D7700400853 /* Preview Content */,
+				DC572BC924D9B72900304B83 /* PrimaryButtonStyle.swift */,
 			);
 			path = EventKit.Example;
 			sourceTree = "<group>";
@@ -108,6 +115,8 @@
 			children = (
 				DCB88F7624D5861500400853 /* EKEvent+Extension.swift */,
 				DCB88F7824D5863B00400853 /* TimeInterval+Extension.swift */,
+				DC572BC524D9B4F500304B83 /* Notifications.swift */,
+				DC572BC724D9B6DF00304B83 /* EKCalendar+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -185,14 +194,17 @@
 			files = (
 				DCB88F7124D4813000400853 /* CalendarChooser.swift in Sources */,
 				DCB88F7424D5832500400853 /* EventRow.swift in Sources */,
+				DC572BC624D9B4F500304B83 /* Notifications.swift in Sources */,
 				DCB88F5B24D47D7500400853 /* AppDelegate.swift in Sources */,
 				DC572BC424D9AEED00304B83 /* EventEditView.swift in Sources */,
 				DCB88F7924D5863B00400853 /* TimeInterval+Extension.swift in Sources */,
 				DCB88F5D24D47D7500400853 /* SceneDelegate.swift in Sources */,
+				DC572BCA24D9B72900304B83 /* PrimaryButtonStyle.swift in Sources */,
 				DCB88F6F24D47ECE00400853 /* EventsRepository.swift in Sources */,
 				DCB88F5F24D47D7500400853 /* ContentView.swift in Sources */,
 				DCB88F7B24D586F500400853 /* SelectedCalendarsList.swift in Sources */,
 				DCB88F7724D5861500400853 /* EKEvent+Extension.swift in Sources */,
+				DC572BC824D9B6DF00304B83 /* EKCalendar+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
