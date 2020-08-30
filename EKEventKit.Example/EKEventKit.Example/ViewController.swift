@@ -73,8 +73,61 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         UserDefaults.standard.set(identifiers, forKey: "CalendarIdentifiers")
     }
     
+    func createNewCalendar(withName name: String) {
+        let calendar = EKCalendar(for: .event, eventStore: eventStore)
+        calendar.title = name
+        calendar.cgColor = UIColor.purple.cgColor
+        
+        guard let source = bestPossibleEKSource() else {
+            return // source is required, otherwise calendar cannot be saved
+        }
+        
+        calendar.source = source
+        
+        try! eventStore.saveCalendar(calendar, commit: true)
+    }
+    
+    func bestPossibleEKSource() -> EKSource? {
+        let `default` = eventStore.defaultCalendarForNewEvents?.source
+        let iCloud = eventStore.sources.first(where: { $0.title == "iCloud" }) // this is fragile, user can rename the source
+        let local = eventStore.sources.first(where: { $0.sourceType == .local })
+        
+        return `default` ?? iCloud ?? local
+    }
+    
+    func showNewEntitySelection() {
+        let ac = UIAlertController(title: "New...", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Event", style: .default, handler: { (_) in
+            self.showEditViewController(for: nil)
+        }))
+        ac.addAction(UIAlertAction(title: "Calendar", style: .default, handler: { (_) in
+            self.showNewCalendarDialog()
+        }))
+        
+        ac.addCancelAction()
+        
+        present(ac, animated: true)
+    }
+    
+    func showNewCalendarDialog() {
+        let ac = UIAlertController(title: "Create new calendar", message: nil, preferredStyle: .alert)
+        ac.addTextField { (textField) in
+            textField.placeholder = "Calendar name"
+            textField.autocapitalizationType = .words
+        }
+        ac.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
+            guard let name = ac.textFields!.first!.text else { return }
+            
+            self.createNewCalendar(withName: name)
+        }))
+        
+        ac.addCancelAction()
+        
+        present(ac, animated: true)
+    }
+    
     @IBAction func addButtonTapped(_ sender: Any) {
-        showEditViewController(for: nil)
+        showNewEntitySelection()
     }
     
     @IBAction func selectCalendarTapped(_ sender: Any) {

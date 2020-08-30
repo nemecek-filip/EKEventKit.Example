@@ -11,6 +11,8 @@
 
 # EKEventKit Example
 
+You can read **more about EventKit** on my [website](https://nemecek.be/blog/series/eventkit).
+
 #### SwiftUI version is currently work in progress. Feel free to help and suggest improvements. I have so far done just a little of SwiftUI..
 
 [![Twitter: @nemecek_f](https://img.shields.io/badge/contact-@nemecek_f-blue.svg?style=flat)](https://twitter.com/nemecek_f)

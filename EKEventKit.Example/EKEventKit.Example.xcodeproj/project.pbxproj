@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DC25622B2438CA6E00CF127C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC25622A2438CA6E00CF127C /* MapViewController.swift */; };
 		DC25622E2438CA7B00CF127C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC25622D2438CA7B00CF127C /* MapKit.framework */; };
+		DC59DD6024FC189A0019C462 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC59DD5F24FC189A0019C462 /* UIAlertController+Extension.swift */; };
 		DC7C39E0245B5F02008AD36C /* EKEvent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C39DF245B5F02008AD36C /* EKEvent+Extension.swift */; };
 		DC7C39E2245B5F1B008AD36C /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C39E1245B5F1B008AD36C /* TimeInterval+Extension.swift */; };
 		DC7C39E5245B5F70008AD36C /* DisplaysCalendars.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C39E4245B5F70008AD36C /* DisplaysCalendars.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		DC25622A2438CA6E00CF127C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DC25622D2438CA7B00CF127C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DC59DD5F24FC189A0019C462 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		DC7C39DF245B5F02008AD36C /* EKEvent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKEvent+Extension.swift"; sourceTree = "<group>"; };
 		DC7C39E1245B5F1B008AD36C /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		DC7C39E4245B5F70008AD36C /* DisplaysCalendars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysCalendars.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			children = (
 				DC7C39DF245B5F02008AD36C /* EKEvent+Extension.swift */,
 				DC7C39E1245B5F1B008AD36C /* TimeInterval+Extension.swift */,
+				DC59DD5F24FC189A0019C462 /* UIAlertController+Extension.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC59DD6024FC189A0019C462 /* UIAlertController+Extension.swift in Sources */,
 				DC7C39E5245B5F70008AD36C /* DisplaysCalendars.swift in Sources */,
 				DCE1782D24321B8500BC4790 /* EventCell.swift in Sources */,
 				DCE1781D243209A500BC4790 /* ViewController.swift in Sources */,
