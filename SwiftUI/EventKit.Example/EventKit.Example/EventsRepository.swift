@@ -59,6 +59,7 @@ class EventsRepository: ObservableObject {
         loadEvents(completion: { (events) in
             DispatchQueue.main.async {
                 self.events = events
+                print(events ?? [])
             }
         })
     }

@@ -39,7 +39,8 @@ struct ContentView: View {
                             .font(.headline)
                             .foregroundColor(.secondary)
                     }
-                    ForEach(eventsRepository.events ?? []) { event in
+                    
+                    ForEach(eventsRepository.events ?? [], id: \.self) { event in
                         EventRow(event: event).onTapGesture {
                             self.showEditFor(event)
                         }
