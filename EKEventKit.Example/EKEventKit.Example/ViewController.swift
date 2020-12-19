@@ -6,6 +6,7 @@
 //  Copyright © 2020 Filip Němeček. All rights reserved.
 //
 
+import Combine
 import UIKit
 import EventKitUI
 
@@ -18,6 +19,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     lazy var selectedCalendars = Set([eventStore.defaultCalendarForNewEvents].compactMap({ $0 }))
     
     var events: [EKEvent]?
+    
+    var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +47,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     self.loadEvents()
                     
                     self.displaySelectedCalendars()
+                    
+                    self.subscribeToCalendarChanges()
                 }
             }
         }
@@ -66,6 +71,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard !calendars.isEmpty else { return }
             selectedCalendars = Set(calendars)
         }
+    }
+    
+    func subscribeToCalendarChanges() {
+        NotificationCenter.default.publisher(for: .EKEventStoreChanged)
+            .sink { (_) in
+            
+                // calendar changed externally, reload events
+                DispatchQueue.main.async {
+                    self.loadEvents()
+                }
+                
+        }.store(in: &cancellables)
     }
     
     func saveSelectedCalendars() {
