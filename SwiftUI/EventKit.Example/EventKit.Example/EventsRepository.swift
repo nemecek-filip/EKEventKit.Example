@@ -36,7 +36,13 @@ class EventsRepository: ObservableObject {
             .sink { [weak self] (notification) in
                 self?.loadAndUpdateEvents()
                 
-        }.store(in: &subscribers)
+            }.store(in: &subscribers)
+        
+        NotificationCenter.default.publisher(for: .EKEventStoreChanged)
+            .sink { [weak self] (notification) in
+                self?.loadAndUpdateEvents()
+            }
+            .store(in: &subscribers)
     }
     
     private func loadSelectedCalendars() -> Set<EKCalendar>? {
