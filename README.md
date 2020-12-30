@@ -5,6 +5,8 @@
   <a href="https://github.com/nemecek-filip/QLPreviewController.Example">Quick Look</a> 	&bull;
   <a href="https://github.com/nemecek-filip/App-ideas">App Ideas</a> &bull;
   <a href="https://github.com/nemecek-filip/KeyboardPreview.iOS">Keyboard Preview</a>
+  &bull;
+  <a href="https://github.com/nemecek-filip/CompositionalDiffablePlayground.ios">Modern Collection Views</a>
 </p>
 
 ----
