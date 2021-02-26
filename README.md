@@ -102,6 +102,9 @@ extension EKEvent {
 }
 ```
 
+## Not seeing anything? 
+If the device or simulator has not initialized the Calendar app, the default calendar does not exist. Open the Calendar app on the device or simulated device. Build and run the app again. 
+
 ## Other stuff to check out
 * [Example project](https://github.com/nemecek-filip/QLPreviewController.Example) showing Quick Look framework: Usage of `QLPreviewController` and `QLPreviewGenerator` to display and generate previews of various files like PDF, Pages documents, Keynote presentation, images and more.
 * [Dynamic Type - Reference App](https://github.com/nemecek-filip/DynamicType-ReferenceApp) to quickly preview Dynamic Type fonts so you can **visualize** them instead of just guessing.
