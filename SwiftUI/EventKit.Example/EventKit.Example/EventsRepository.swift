@@ -25,7 +25,13 @@ class EventsRepository: ObservableObject {
     @Published var events: [EKEvent]?
     
     private init() {
-        selectedCalendars = loadSelectedCalendars() ?? Set([eventStore.defaultCalendarForNewEvents].compactMap({ $0 }))
+        selectedCalendars = loadSelectedCalendars()
+        
+        if selectedCalendars == nil {
+            if EKEventStore.authorizationStatus(for: .event) == .authorized {
+                selectedCalendars = Set([eventStore.defaultCalendarForNewEvents].compactMap({ $0 }))
+            }
+        }
         
         $selectedCalendars.sink { [weak self] (calendars) in
             self?.saveSelectedCalendars(calendars)
